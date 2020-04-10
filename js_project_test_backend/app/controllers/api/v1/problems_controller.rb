@@ -6,14 +6,16 @@ class Api::V1::ProblemsController < ApplicationController
     end
 
     def create
-        @problem = Problem.create(params)
+        
+        @problem = Problem.create(problem_params)
+        #byebug
         render json: @problem
     end
 
 private
 
     def problem_params
-        params.permit(:title, :description)
+        params.require(:problem).permit(:name, :description, :user_id)
     end
 
 end
