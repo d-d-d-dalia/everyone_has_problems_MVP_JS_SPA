@@ -43,7 +43,6 @@ function displayUser(user) {
             appendProblem(problem)
         })
     }
-
 }
 
 function newProblemForm(id) {
@@ -58,8 +57,9 @@ function newProblemForm(id) {
             <input type="submit"/>
         </form>
     `
-    body.insertAdjacentHTML( 'beforeend', form );
-    document.addEventListener('submit', function(e){
+    body.insertAdjacentHTML( 'beforeend', form )
+    let newForm = document.getElementById('new-user-and-new-problem-form')
+    newForm.addEventListener('submit', function(e){
         e.preventDefault()
         fetch('http://localhost:3000/api/v1/problems', {
             method: "POST",
@@ -84,8 +84,26 @@ function newProblemForm(id) {
 
 function appendProblem(problem){
     let body = document.getElementById('container')
-    let problems = document.createElement('div')
-    //problems.innerHTML = "Your Problems:   "
+    let problems = document.createElement('ul')
+    let li = document.createElement('li')
+    li.setAttribute('data-id', problem.id)
+    li.setAttribute('id', 'problem')
+    problems.append(li)
     body.append(problems)
-    problems.append(`${problem.name} ~ ${problem.description}`)
+    let solveForm = `<button type="button" id="solve-problem">Solve</button>`
+    li.append(`${problem.name} ~ ${problem.description}`)
+    li.insertAdjacentHTML('beforeend', solveForm)
+    let deleteButton = document.getElementById('solve-problem')
+    deleteButton.addEventListener('click', function(e){
+        fetch(`http://localhost:3000/api/v1/problems/${e.target.parentNode.dataset.id}`, {                method: "DELETE",
+                method: "DELETE",
+                })
+                    .then(resp =>  {
+                        return resp.json()
+                    })
+                    .then(problem => {
+                        li.innerText = ''
+                        console.log(problem)
+                    })
+        })
 }
