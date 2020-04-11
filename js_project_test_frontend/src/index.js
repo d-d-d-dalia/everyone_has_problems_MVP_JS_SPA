@@ -85,6 +85,7 @@ function newProblemForm(id) {
 function appendProblem(problem){
     let body = document.getElementById('container')
     let problems = document.createElement('ul')
+    problems.setAttribute('style', "list-style-type:none")
     let li = document.createElement('li')
     li.setAttribute('data-id', problem.id)
     li.setAttribute('id', 'problem')
