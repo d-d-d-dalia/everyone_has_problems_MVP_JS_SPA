@@ -37,7 +37,7 @@ function displayUser(user) {
     let id = userContainer.dataset.id
     userContainer.innerHTML = `Welcome, ${user.name}!`
     body.append(userContainer)
-    newProblemForm(id)
+    newProblemForm(user.id)
     if (user.problems) {
         user.problems.forEach(function(problem){
             appendProblem(problem)
@@ -79,6 +79,7 @@ function newProblemForm(id) {
         })
         .then(resp => resp.json())
         .then(json => appendProblem(json))
+        newForm.reset()
     })
 }
 
@@ -92,19 +93,19 @@ function appendProblem(problem){
     problems.append(li)
     body.append(problems)
     let solveForm = `<button type="button" id="solve-problem">Solve</button>`
-    li.append(`${problem.name} ~ ${problem.description}`)
+    li.innerHTML = `${problem.name} ~ ${problem.description}`
     li.insertAdjacentHTML('beforeend', solveForm)
     let deleteButton = document.getElementById('solve-problem')
     deleteButton.addEventListener('click', function(e){
-        fetch(`http://localhost:3000/api/v1/problems/${e.target.parentNode.dataset.id}`, {                method: "DELETE",
+        fetch(`http://localhost:3000/api/v1/problems/${e.target.parentNode.dataset.id}`, {
                 method: "DELETE",
                 })
                     .then(resp =>  {
                         return resp.json()
                     })
                     .then(problem => {
+                        //let newProblem = new Problem(problem)
                         li.innerText = ''
-                        console.log(problem)
                     })
         })
 }
