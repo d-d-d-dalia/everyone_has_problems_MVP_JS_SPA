@@ -85,9 +85,11 @@ function newProblem(id) {
 
 function appendProblem(problem){
     let problems = document.getElementsByClassName('problems-container')
+    //problems is an html collection
     let li = document.createElement('li')
     li.setAttribute('data-id', problem.id)
     li.setAttribute('style', "list-style-type:none")
+    //this is just so I don't see actually bullets
     li.innerHTML = `${problem.name} ~ ${problem.description}`
     let solveForm = `<button type="button" id="${problem.id}" class="solve-problem"> Solve </button>`
     li.insertAdjacentHTML('beforeend', solveForm)
@@ -99,7 +101,7 @@ function appendProblem(problem){
             fetch(`http://localhost:3000/api/v1/problems/${e.target.parentNode.dataset.id}`, {
                     method: "DELETE"
                     })
-        li.innerText = ''
+                    e.target.parentElement.remove();
         })
     })
 }
