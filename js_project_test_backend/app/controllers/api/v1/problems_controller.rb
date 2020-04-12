@@ -6,15 +6,13 @@ class Api::V1::ProblemsController < ApplicationController
     end
 
     def create
-        
         @problem = Problem.create(problem_params)
-        #byebug
         render json: @problem
     end
 
     def destroy
-        #byebug
         @problem = Problem.find_by(id: params[:id]).destroy
+        #byebug
         render json: @problem
     end
 

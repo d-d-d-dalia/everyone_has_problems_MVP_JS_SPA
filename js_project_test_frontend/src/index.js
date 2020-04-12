@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function(){
     createUser()
 })
-    
+
 function createUser(){
     let newUserForm = document.getElementById('new-user-and-new-problem-form')
     let newUser = document.getElementById('new-user-body')
@@ -37,7 +37,7 @@ function displayUser(user) {
     let id = userContainer.dataset.id
     userContainer.innerHTML = `Welcome, ${user.name}!`
     body.append(userContainer)
-    newProblemForm(user.id)
+    newProblem(user.id)
     if (user.problems) {
         user.problems.forEach(function(problem){
             appendProblem(problem)
@@ -45,7 +45,7 @@ function displayUser(user) {
     }
 }
 
-function newProblemForm(id) {
+function newProblem(id) {
     let body = document.getElementById('container')
     let form = 
     `
@@ -84,28 +84,22 @@ function newProblemForm(id) {
 }
 
 function appendProblem(problem){
-    let body = document.getElementById('container')
-    let problems = document.createElement('ul')
-    problems.setAttribute('style', "list-style-type:none")
+    let problems = document.getElementsByClassName('problems-container')
     let li = document.createElement('li')
     li.setAttribute('data-id', problem.id)
-    li.setAttribute('id', 'problem')
-    problems.append(li)
-    body.append(problems)
-    let solveForm = `<button type="button" id="solve-problem">Solve</button>`
+    li.setAttribute('style', "list-style-type:none")
     li.innerHTML = `${problem.name} ~ ${problem.description}`
+    let solveForm = `<button type="button" id="${problem.id}" class="solve-problem"> Solve </button>`
     li.insertAdjacentHTML('beforeend', solveForm)
-    let deleteButton = document.getElementById('solve-problem')
-    deleteButton.addEventListener('click', function(e){
-        fetch(`http://localhost:3000/api/v1/problems/${e.target.parentNode.dataset.id}`, {
-                method: "DELETE",
-                })
-                    .then(resp =>  {
-                        return resp.json()
+    let button = document.getElementsByTagName('button')
+    problems[0].append(li)
+    Array.from(button).forEach(function (b) {
+        b.addEventListener('click', function(e){
+            e.preventDefault()
+            fetch(`http://localhost:3000/api/v1/problems/${e.target.parentNode.dataset.id}`, {
+                    method: "DELETE"
                     })
-                    .then(problem => {
-                        //let newProblem = new Problem(problem)
-                        li.innerText = ''
-                    })
+        li.innerText = ''
         })
+    })
 }
