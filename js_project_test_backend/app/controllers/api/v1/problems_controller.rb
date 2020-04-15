@@ -12,7 +12,6 @@ class Api::V1::ProblemsController < ApplicationController
 
     def destroy
         @problem = Problem.find_by(id: params[:id]).destroy
-        #byebug
         render json: @problem
     end
 
