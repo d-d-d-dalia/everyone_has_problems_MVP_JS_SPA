@@ -15,9 +15,10 @@ class Problem {
                 <label>Describe it:</label>
                 <input type="text" id="problem-description"/>
                 <input type="submit"/>
+                <h4>Your current problems:</h4>
             </form>
         `
-        body.insertAdjacentHTML( 'beforeend', form )
+        body.insertAdjacentHTML('beforeend', form)
         let newForm = document.getElementById('new-user-and-new-problem-form')
         newForm.addEventListener('submit', function(e){
             e.preventDefault()
@@ -40,33 +41,33 @@ class Problem {
             .then(resp => resp.json())
             .then(function(json) {
                 let newProblem = new Problem(json)
-                newProblem.appendProblem()
                 newForm.reset()
+                newProblem.appendProblem()
+                
             })
         })
     }
 
     appendProblem(){
         let problems = document.getElementsByClassName('problems-container')
-        //problems is an html collection
         let li = document.createElement('li')
         li.setAttribute('data-id', this.id)
         li.setAttribute('style', "list-style-type:none")
-        //this is just so I don't see actually bullets
-        li.innerHTML = `${this.name} ~ ${this.description}`
+        li.innerHTML = `${this.name} ~~ ${this.description}`
         let solveForm = `<button type="button" id="${this.id}" class="solve-problem"> Solve </button>`
         li.insertAdjacentHTML('beforeend', solveForm)
-        let button = document.getElementsByClassName('solve-problem')
         problems[0].append(li)
-        Array.from(button).forEach(function (b) {
-            b.addEventListener('click', function(e){
-                e.preventDefault()
-                fetch(`http://localhost:3000/api/v1/problems/${e.target.parentNode.dataset.id}`, {
-                        method: "DELETE"
-                        })
-                        e.target.parentElement.remove();
-            })
-        })
+        let button = document.getElementById(`${this.id}`)
+        this.solve(button)
     }
 
+    solve(button){
+        button.addEventListener('click', function(e){
+            e.preventDefault()
+            fetch(`http://localhost:3000/api/v1/problems/${e.target.parentNode.dataset.id}`, {
+                    method: "DELETE"
+            })
+                    e.target.parentElement.remove();
+        })
+    }
 }

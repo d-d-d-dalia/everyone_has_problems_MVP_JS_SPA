@@ -20188,3 +20188,277 @@ Processing by Api::V1::UsersController#show as JSON
 Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms | Allocations: 2323)
 
 
+Started POST "/api/v1/users" for ::1 at 2020-04-15 15:00:43 -0400
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::UsersController#create as JSON
+  Parameters: {"user"=>{"name"=>"Matthew Hepburn"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "Matthew Hepburn"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:9:in `create'
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:13:in `create'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name") VALUES (?)[0m  [["name", "Matthew Hepburn"]]
+  ↳ app/controllers/api/v1/users_controller.rb:13:in `create'
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:13:in `create'
+[active_model_serializers]   [1m[36mProblem Load (0.1ms)[0m  [1m[34mSELECT "problems".* FROM "problems" WHERE "problems"."user_id" = ?[0m  [["user_id", 94]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:14:in `create'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (6.36ms)
+Completed 200 OK in 23ms (Views: 13.7ms | ActiveRecord: 2.7ms | Allocations: 11515)
+
+
+Started POST "/api/v1/problems" for ::1 at 2020-04-15 15:01:04 -0400
+Processing by Api::V1::ProblemsController#create as JSON
+  Parameters: {"problem"=>{"name"=>"squirrels", "description"=>"they're flying rats", "user_id"=>94}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/problems_controller.rb:9:in `create'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 94], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/problems_controller.rb:9:in `create'
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("name", "description", "user_id") VALUES (?, ?, ?)[0m  [["name", "squirrels"], ["description", "they're flying rats"], ["user_id", 94]]
+  ↳ app/controllers/api/v1/problems_controller.rb:9:in `create'
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/problems_controller.rb:9:in `create'
+[active_model_serializers] Rendered ProblemSerializer with ActiveModelSerializers::Adapter::Attributes (0.59ms)
+Completed 200 OK in 11ms (Views: 1.8ms | ActiveRecord: 1.7ms | Allocations: 6812)
+
+
+Started POST "/api/v1/problems" for ::1 at 2020-04-15 15:01:20 -0400
+Processing by Api::V1::ProblemsController#create as JSON
+  Parameters: {"problem"=>{"name"=>"sweat", "description"=>"I'd rather have bad teeth", "user_id"=>94}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/problems_controller.rb:9:in `create'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 94], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/problems_controller.rb:9:in `create'
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("name", "description", "user_id") VALUES (?, ?, ?)[0m  [["name", "sweat"], ["description", "I'd rather have bad teeth"], ["user_id", 94]]
+  ↳ app/controllers/api/v1/problems_controller.rb:9:in `create'
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/problems_controller.rb:9:in `create'
+[active_model_serializers] Rendered ProblemSerializer with ActiveModelSerializers::Adapter::Attributes (0.48ms)
+Completed 200 OK in 6ms (Views: 0.9ms | ActiveRecord: 1.9ms | Allocations: 3510)
+
+
+Started DELETE "/api/v1/problems/135" for ::1 at 2020-04-15 15:01:27 -0400
+Processing by Api::V1::ProblemsController#destroy as */*
+  Parameters: {"id"=>"135"}
+  [1m[36mProblem Load (0.1ms)[0m  [1m[34mSELECT "problems".* FROM "problems" WHERE "problems"."id" = ? LIMIT ?[0m  [["id", 135], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/problems_controller.rb:14:in `destroy'
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/problems_controller.rb:14:in `destroy'
+  [1m[36mProblem Destroy (0.3ms)[0m  [1m[31mDELETE FROM "problems" WHERE "problems"."id" = ?[0m  [["id", 135]]
+  ↳ app/controllers/api/v1/problems_controller.rb:14:in `destroy'
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/problems_controller.rb:14:in `destroy'
+[active_model_serializers]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 94], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/problems_controller.rb:15:in `destroy'
+[active_model_serializers] Rendered ProblemSerializer with ActiveModelSerializers::Adapter::Attributes (1.39ms)
+Completed 200 OK in 5ms (Views: 1.6ms | ActiveRecord: 1.5ms | Allocations: 3776)
+
+
+Started DELETE "/api/v1/problems/134" for ::1 at 2020-04-15 15:01:28 -0400
+Processing by Api::V1::ProblemsController#destroy as */*
+  Parameters: {"id"=>"134"}
+  [1m[36mProblem Load (0.1ms)[0m  [1m[34mSELECT "problems".* FROM "problems" WHERE "problems"."id" = ? LIMIT ?[0m  [["id", 134], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/problems_controller.rb:14:in `destroy'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/problems_controller.rb:14:in `destroy'
+  [1m[36mProblem Destroy (0.4ms)[0m  [1m[31mDELETE FROM "problems" WHERE "problems"."id" = ?[0m  [["id", 134]]
+  ↳ app/controllers/api/v1/problems_controller.rb:14:in `destroy'
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/problems_controller.rb:14:in `destroy'
+[active_model_serializers]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 94], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/problems_controller.rb:15:in `destroy'
+[active_model_serializers] Rendered ProblemSerializer with ActiveModelSerializers::Adapter::Attributes (1.63ms)
+Completed 200 OK in 6ms (Views: 1.9ms | ActiveRecord: 1.6ms | Allocations: 3629)
+
+
+Started POST "/api/v1/users" for ::1 at 2020-04-15 15:01:36 -0400
+Processing by Api::V1::UsersController#create as JSON
+  Parameters: {"user"=>{"name"=>"Matthew Hepburn"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "Matthew Hepburn"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:9:in `create'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "Matthew Hepburn"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:10:in `create'
+Redirected to http://localhost:3000/api/v1/users/94
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms | Allocations: 1064)
+
+
+Started GET "/api/v1/users/94" for ::1 at 2020-04-15 15:01:36 -0400
+Processing by Api::V1::UsersController#show as JSON
+  Parameters: {"id"=>"94", "user"=>{}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 94], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `show'
+[active_model_serializers]   [1m[36mProblem Load (0.1ms)[0m  [1m[34mSELECT "problems".* FROM "problems" WHERE "problems"."user_id" = ?[0m  [["user_id", 94]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:20:in `show'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (1.23ms)
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.1ms | Allocations: 2038)
+
+
+Started POST "/api/v1/problems" for ::1 at 2020-04-15 15:01:47 -0400
+Processing by Api::V1::ProblemsController#create as JSON
+  Parameters: {"problem"=>{"name"=>"sweat", "description"=>"Rather have bad teeth", "user_id"=>94}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/problems_controller.rb:9:in `create'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 94], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/problems_controller.rb:9:in `create'
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("name", "description", "user_id") VALUES (?, ?, ?)[0m  [["name", "sweat"], ["description", "Rather have bad teeth"], ["user_id", 94]]
+  ↳ app/controllers/api/v1/problems_controller.rb:9:in `create'
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/problems_controller.rb:9:in `create'
+[active_model_serializers] Rendered ProblemSerializer with ActiveModelSerializers::Adapter::Attributes (0.39ms)
+Completed 200 OK in 5ms (Views: 0.7ms | ActiveRecord: 1.2ms | Allocations: 3487)
+
+
+Started POST "/api/v1/users" for ::1 at 2020-04-15 15:01:52 -0400
+Processing by Api::V1::UsersController#create as JSON
+  Parameters: {"user"=>{"name"=>"Matthew Hepburn"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "Matthew Hepburn"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:9:in `create'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "Matthew Hepburn"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:10:in `create'
+Redirected to http://localhost:3000/api/v1/users/94
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms | Allocations: 1051)
+
+
+Started GET "/api/v1/users/94" for ::1 at 2020-04-15 15:01:52 -0400
+Processing by Api::V1::UsersController#show as JSON
+  Parameters: {"id"=>"94", "user"=>{}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 94], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `show'
+[active_model_serializers]   [1m[36mProblem Load (0.1ms)[0m  [1m[34mSELECT "problems".* FROM "problems" WHERE "problems"."user_id" = ?[0m  [["user_id", 94]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:20:in `show'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (1.66ms)
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.2ms | Allocations: 2141)
+
+
+Started POST "/api/v1/users" for ::1 at 2020-04-15 15:01:58 -0400
+Processing by Api::V1::UsersController#create as JSON
+  Parameters: {"user"=>{"name"=>"Dalia"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "Dalia"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:9:in `create'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "Dalia"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:10:in `create'
+Redirected to http://localhost:3000/api/v1/users/92
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms | Allocations: 1050)
+
+
+Started GET "/api/v1/users/92" for ::1 at 2020-04-15 15:01:58 -0400
+Processing by Api::V1::UsersController#show as JSON
+  Parameters: {"id"=>"92", "user"=>{}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 92], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `show'
+[active_model_serializers]   [1m[36mProblem Load (0.1ms)[0m  [1m[34mSELECT "problems".* FROM "problems" WHERE "problems"."user_id" = ?[0m  [["user_id", 92]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:20:in `show'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (1.86ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms | Allocations: 2323)
+
+
+Started POST "/api/v1/users" for ::1 at 2020-04-15 15:02:06 -0400
+Processing by Api::V1::UsersController#create as JSON
+  Parameters: {"user"=>{"name"=>"Mahmoud"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "Mahmoud"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:9:in `create'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "Mahmoud"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:10:in `create'
+Redirected to http://localhost:3000/api/v1/users/93
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms | Allocations: 1051)
+
+
+Started GET "/api/v1/users/93" for ::1 at 2020-04-15 15:02:06 -0400
+Processing by Api::V1::UsersController#show as JSON
+  Parameters: {"id"=>"93", "user"=>{}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 93], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `show'
+[active_model_serializers]   [1m[36mProblem Load (0.1ms)[0m  [1m[34mSELECT "problems".* FROM "problems" WHERE "problems"."user_id" = ?[0m  [["user_id", 93]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:20:in `show'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (2.02ms)
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.2ms | Allocations: 1936)
+
+
+Started POST "/api/v1/problems" for ::1 at 2020-04-15 15:02:18 -0400
+Processing by Api::V1::ProblemsController#create as JSON
+  Parameters: {"problem"=>{"name"=>"JS", "description"=>"You're learning", "user_id"=>93}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/problems_controller.rb:9:in `create'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 93], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/problems_controller.rb:9:in `create'
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("name", "description", "user_id") VALUES (?, ?, ?)[0m  [["name", "JS"], ["description", "You're learning"], ["user_id", 93]]
+  ↳ app/controllers/api/v1/problems_controller.rb:9:in `create'
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/problems_controller.rb:9:in `create'
+[active_model_serializers] Rendered ProblemSerializer with ActiveModelSerializers::Adapter::Attributes (0.46ms)
+Completed 200 OK in 6ms (Views: 0.9ms | ActiveRecord: 1.5ms | Allocations: 3487)
+
+
+Started POST "/api/v1/users" for ::1 at 2020-04-15 15:08:02 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::V1::UsersController#create as JSON
+  Parameters: {"user"=>{"name"=>"Dalia"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "Dalia"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:9:in `create'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "Dalia"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:10:in `create'
+Redirected to http://localhost:3000/api/v1/users/92
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms | Allocations: 1059)
+
+
+Started GET "/api/v1/users/92" for ::1 at 2020-04-15 15:08:02 -0400
+Processing by Api::V1::UsersController#show as JSON
+  Parameters: {"id"=>"92", "user"=>{}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 92], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `show'
+[active_model_serializers]   [1m[36mProblem Load (0.1ms)[0m  [1m[34mSELECT "problems".* FROM "problems" WHERE "problems"."user_id" = ?[0m  [["user_id", 92]]
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:20:in `show'
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Attributes (1.99ms)
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.2ms | Allocations: 2344)
+
+
+Started POST "/api/v1/problems" for ::1 at 2020-04-15 15:15:05 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::V1::ProblemsController#create as JSON
+  Parameters: {"problem"=>{"name"=>"squirrels", "description"=>"can't sleep", "user_id"=>92}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/problems_controller.rb:9:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 92], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/problems_controller.rb:9:in `create'
+  [1m[36mProblem Create (0.6ms)[0m  [1m[32mINSERT INTO "problems" ("name", "description", "user_id") VALUES (?, ?, ?)[0m  [["name", "squirrels"], ["description", "can't sleep"], ["user_id", 92]]
+  ↳ app/controllers/api/v1/problems_controller.rb:9:in `create'
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/problems_controller.rb:9:in `create'
+[active_model_serializers] Rendered ProblemSerializer with ActiveModelSerializers::Adapter::Attributes (0.58ms)
+Completed 200 OK in 9ms (Views: 1.1ms | ActiveRecord: 2.2ms | Allocations: 3497)
+
+
+Started DELETE "/api/v1/problems/138" for ::1 at 2020-04-15 15:15:59 -0400
+Processing by Api::V1::ProblemsController#destroy as */*
+  Parameters: {"id"=>"138"}
+  [1m[36mProblem Load (0.3ms)[0m  [1m[34mSELECT "problems".* FROM "problems" WHERE "problems"."id" = ? LIMIT ?[0m  [["id", 138], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/problems_controller.rb:14:in `destroy'
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/problems_controller.rb:14:in `destroy'
+  [1m[36mProblem Destroy (0.3ms)[0m  [1m[31mDELETE FROM "problems" WHERE "problems"."id" = ?[0m  [["id", 138]]
+  ↳ app/controllers/api/v1/problems_controller.rb:14:in `destroy'
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/problems_controller.rb:14:in `destroy'
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 92], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/problems_controller.rb:15:in `destroy'
+[active_model_serializers] Rendered ProblemSerializer with ActiveModelSerializers::Adapter::Attributes (2.61ms)
+Completed 200 OK in 8ms (Views: 3.0ms | ActiveRecord: 1.9ms | Allocations: 3624)
+
+
+Started DELETE "/api/v1/problems/132" for ::1 at 2020-04-15 15:17:21 -0400
+Processing by Api::V1::ProblemsController#destroy as */*
+  Parameters: {"id"=>"132"}
+  [1m[36mProblem Load (0.1ms)[0m  [1m[34mSELECT "problems".* FROM "problems" WHERE "problems"."id" = ? LIMIT ?[0m  [["id", 132], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/problems_controller.rb:14:in `destroy'
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/problems_controller.rb:14:in `destroy'
+  [1m[36mProblem Destroy (0.9ms)[0m  [1m[31mDELETE FROM "problems" WHERE "problems"."id" = ?[0m  [["id", 132]]
+  ↳ app/controllers/api/v1/problems_controller.rb:14:in `destroy'
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/problems_controller.rb:14:in `destroy'
+[active_model_serializers]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 92], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/api/v1/problems_controller.rb:15:in `destroy'
+[active_model_serializers] Rendered ProblemSerializer with ActiveModelSerializers::Adapter::Attributes (2.34ms)
+Completed 200 OK in 7ms (Views: 2.7ms | ActiveRecord: 1.9ms | Allocations: 3612)
+
+

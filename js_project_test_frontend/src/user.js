@@ -38,15 +38,14 @@ class User {
         let userContainer = document.createElement('div')
         userContainer.setAttribute('data-id', user.id)
         let id = userContainer.dataset.id
-        userContainer.innerHTML = `Welcome, ${user.name}!`
+        userContainer.innerHTML = `<h1>Hey, ${user.name}!</h1>`
         body.append(userContainer)
-        Problem.newProblem(user.id)
         if (this.problems) {
             this.problems.forEach(function(problem){
                 let newProblem = new Problem(problem)
                 newProblem.appendProblem()
             })
         }
+        Problem.newProblem(user.id)
     }
-
 }
