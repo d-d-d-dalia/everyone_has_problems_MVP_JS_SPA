@@ -27,18 +27,18 @@ class User {
                         })
                         .then(user => {
                             let newUser = new User(user)
-                            newUser.displayUser(user)
+                            newUser.displayUser()
                         })
         })
     }
 
-    displayUser(user) {
+    displayUser() {
         let body = document.getElementById('container')
         body.innerHTML = ''
         let userContainer = document.createElement('div')
-        userContainer.setAttribute('data-id', user.id)
+        userContainer.setAttribute('data-id', this.id)
         let id = userContainer.dataset.id
-        userContainer.innerHTML = `<h1>Hey, ${user.name}!</h1>`
+        userContainer.innerHTML = `<h1>Hey, ${this.name}!</h1>`
         body.append(userContainer)
         if (this.problems) {
             this.problems.forEach(function(problem){
@@ -46,6 +46,6 @@ class User {
                 newProblem.appendProblem()
             })
         }
-        Problem.newProblem(user.id)
+        Problem.newProblem(this.id)
     }
 }
