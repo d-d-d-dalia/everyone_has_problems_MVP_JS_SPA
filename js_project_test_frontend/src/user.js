@@ -1,4 +1,9 @@
+document.addEventListener('DOMContentLoaded', function(){
+    User.createUser()
+})
+
 class User {
+
     constructor(user){
         this.name = user.name
         this.problems = user.problems
@@ -48,4 +53,5 @@ class User {
         }
         Problem.newProblem(this.id)
     }
+    
 }

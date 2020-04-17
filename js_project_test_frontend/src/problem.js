@@ -1,4 +1,5 @@
 class Problem {
+
     constructor(problem){
         this.id = problem.id
         this.name = problem.name
@@ -8,16 +9,16 @@ class Problem {
     static newProblem(id) {
         let body = document.getElementById('container')
         let form = 
-        `
-            <form id="new-user-and-new-problem-form">
-                <label>What's your problem?:</label>
-                <input type="text" id="problem-name"/>
-                <label>Describe it:</label>
-                <input type="text" id="problem-description"/>
-                <input type="submit"/>
-                <h4>Your current problems:</h4>
-            </form>
-        `
+            `
+                <form id="new-user-and-new-problem-form">
+                    <label>What's your problem?:</label>
+                    <input type="text" id="problem-name"/>
+                    <label>Describe it:</label>
+                    <input type="text" id="problem-description"/>
+                    <input type="submit"/>
+                    <h4>Your current problems:</h4>
+                </form>
+            `
         body.insertAdjacentHTML('beforeend', form)
         let newForm = document.getElementById('new-user-and-new-problem-form')
         newForm.addEventListener('submit', function(e){
@@ -70,4 +71,5 @@ class Problem {
                     e.target.parentElement.remove();
         })
     }
+    
 }
