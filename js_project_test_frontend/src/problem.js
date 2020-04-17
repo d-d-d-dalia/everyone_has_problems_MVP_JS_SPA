@@ -6,7 +6,7 @@ class Problem {
         this.description = problem.description
     }
 
-    static newProblem(id) {
+    static newProblem(user_id) {
         let body = document.getElementById('container')
         let form = 
             `
@@ -34,7 +34,7 @@ class Problem {
                         problem: {
                             name: e.target.children[1].value,
                             description: e.target.children[3].value,
-                            user_id: id
+                            user_id: user_id
                         }
                     }
                 )
@@ -71,5 +71,5 @@ class Problem {
                     e.target.parentElement.remove();
         })
     }
-    
+
 }
