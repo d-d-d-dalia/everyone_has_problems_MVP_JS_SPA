@@ -45,7 +45,7 @@ class Problem {
                 )
             })
             .then(resp => resp.json())
-            .then(function(json) {
+            .then(json => {
                 let newProblem = new Problem(json)
                 newForm.reset()
                 newProblem.appendProblem()
