@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function(){
 class User {
 
     constructor(user){
+        this.id = user.id
         this.name = user.name
         this.problems = user.problems
     }
@@ -32,6 +33,7 @@ class User {
                         })
                         .then(user => {
                             let newUser = new User(user)
+                            console.log(newUser)
                             newUser.displayUser()
                         })
         })
