@@ -6,7 +6,7 @@ class Problem {
         this.description = problem.description
     }
 
-    static newProblem(user_id) {
+    static newProblemForm(user_id) {
         let body = document.getElementById('container')
         let form = 
             `

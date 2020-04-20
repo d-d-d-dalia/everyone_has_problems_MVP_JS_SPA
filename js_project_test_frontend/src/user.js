@@ -53,7 +53,7 @@ class User {
                 newProblem.appendProblem()
             })
         }
-        Problem.newProblem(this.id)
+        Problem.newProblemForm(this.id)
     }
     
 }
