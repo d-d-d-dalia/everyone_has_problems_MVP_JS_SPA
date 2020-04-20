@@ -10,7 +10,7 @@ class Problem {
         let body = document.getElementById('container')
         let form = 
             `
-                <form id="new-user-and-new-problem-form">
+                <form id="new-problem-form">
                     <label>What's your problem?:</label>
                     <input type="text" id="problem-name"/>
                     <label>Describe it:</label>
@@ -20,7 +20,12 @@ class Problem {
                 </form>
             `
         body.insertAdjacentHTML('beforeend', form)
-        let newForm = document.getElementById('new-user-and-new-problem-form')
+        Problem.postProblem(user_id)
+    }
+
+    //is it appropriate for this to be a static method?
+    static postProblem(user_id) {
+        let newForm = document.getElementById('new-problem-form')
         newForm.addEventListener('submit', function(e){
             e.preventDefault()
             fetch('http://localhost:3000/api/v1/problems', {
@@ -41,7 +46,6 @@ class Problem {
             })
             .then(resp => resp.json())
             .then(function(json) {
-                console.log(json)
                 let newProblem = new Problem(json)
                 newForm.reset()
                 newProblem.appendProblem()

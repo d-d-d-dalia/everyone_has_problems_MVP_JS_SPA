@@ -11,7 +11,7 @@ class User {
     }
 
     static createUser(){
-        let newUserForm = document.getElementById('new-user-and-new-problem-form')
+        let newUserForm = document.getElementById('new-user-form')
         let newUser = document.getElementById('new-user-body')
         newUserForm.addEventListener('submit', function(e){
             e.preventDefault()
