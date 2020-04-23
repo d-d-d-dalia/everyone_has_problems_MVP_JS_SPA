@@ -40,11 +40,11 @@ class User {
     displayUser() {
         let body = document.getElementById('container')
         body.innerHTML = ''
-        let userContainer = document.createElement('div')
-        userContainer.setAttribute('data-id', this.id)
-        let id = userContainer.dataset.id
-        userContainer.innerHTML = `<h1>Hey, ${this.name}!</h1>`
-        body.append(userContainer)
+        let userGreeting = document.createElement('p')
+        userGreeting.setAttribute('data-id', this.id)
+        let id = userGreeting.dataset.id
+        userGreeting.innerHTML = `<h1>Hey, ${this.name}!</h1>`
+        body.append(userGreeting)
         if (this.problems) {
             this.problems.forEach(function(problem){
                 let newProblem = new Problem(problem)
