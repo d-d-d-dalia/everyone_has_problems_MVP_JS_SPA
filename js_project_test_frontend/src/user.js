@@ -12,7 +12,6 @@ class User {
 
     static createUser(){
         let newUserForm = document.getElementById('new-user-form')
-        let newUser = document.getElementById('new-user-body')
         newUserForm.addEventListener('submit', function(e){
             e.preventDefault()
                 fetch('http://localhost:3000/api/v1/users', {
@@ -33,7 +32,6 @@ class User {
                         })
                         .then(user => {
                             let newUser = new User(user)
-                            console.log(newUser)
                             newUser.displayUser()
                         })
         })
