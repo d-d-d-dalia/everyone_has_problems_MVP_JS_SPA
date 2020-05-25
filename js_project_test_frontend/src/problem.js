@@ -23,7 +23,6 @@ class Problem {
         Problem.postProblem(user_id)
     }
 
-    //is it appropriate for this to be a static method?
     static postProblem(user_id) {
         let newForm = document.getElementById('new-problem-form')
         newForm.addEventListener('submit', function(e){
