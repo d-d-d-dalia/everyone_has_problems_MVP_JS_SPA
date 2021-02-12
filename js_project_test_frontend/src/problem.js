@@ -1,9 +1,12 @@
 class Problem {
 
+    static allProblems = []
+
     constructor(problem){
         this.id = problem.id
         this.name = problem.name
         this.description = problem.description
+        Problem.allProblems.push(this)
     }
 
     static newProblemForm(user_id) {
@@ -20,48 +23,35 @@ class Problem {
                 </form>
             `
         body.insertAdjacentHTML('beforeend', form)
-        Problem.postProblem(user_id)
+        Problem.makeProblem(user_id)
     }
 
-    static postProblem(user_id) {
+    static makeProblem(user_id) {
         let newForm = document.getElementById('new-problem-form')
         newForm.addEventListener('submit', function(e){
             e.preventDefault()
-            fetch('http://localhost:3000/api/v1/problems', {
-                method: "POST",
-                headers:{
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify(
-                    {
-                        problem: {
-                            name: e.target.children[1].value,
-                            description: e.target.children[3].value,
-                            user_id: user_id
-                        }
-                    }
-                )
-            })
-            .then(resp => resp.json())
-            .then(json => {
-                let newProblem = new Problem(json)
-                newForm.reset()
-                newProblem.appendProblem()
-                
-            })
+            apiService.postProblem(e, user_id)
+                .then(json => {
+                    console.log(json)
+                    newForm.reset()
+                    let newProblem = new Problem(json)
+                    newProblem.createProblemCard()
+                })
         })
     }
 
-    appendProblem(){
+    createProblemCard() {
+        let p = document.createElement('p')
+        p.setAttribute('data-id', this.id)
+        p.innerHTML = `${this.name} ~~ ${this.description}`
+        let solveForm = ` <button type="button" id="${this.id}" class="solve-problem"> Solve </button>`
+        p.insertAdjacentHTML('beforeend', solveForm)
+        this.appendProblem(p)
+    }
+
+    appendProblem(p){
         let problems = document.getElementsByClassName('problems-container')
-        let li = document.createElement('li')
-        li.setAttribute('data-id', this.id)
-        li.setAttribute('style', "list-style-type:none")
-        li.innerHTML = `${this.name} ~~ ${this.description}`
-        let solveForm = `<button type="button" id="${this.id}" class="solve-problem"> Solve </button>`
-        li.insertAdjacentHTML('beforeend', solveForm)
-        problems[0].append(li)
+        problems[0].append(p)
         let button = document.getElementById(`${this.id}`)
         this.solve(button)
     }
@@ -69,11 +59,8 @@ class Problem {
     solve(button){
         button.addEventListener('click', function(e){
             e.preventDefault()
-            fetch(`http://localhost:3000/api/v1/problems/${e.target.parentNode.dataset.id}`, {
-                    method: "DELETE"
-            })
-                    e.target.parentElement.remove();
+            apiService.deleteProblem(e)
+                e.target.parentElement.remove();
         })
     }
-
 }
